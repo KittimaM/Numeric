@@ -1,0 +1,232 @@
+{
+	"swagger": "2.0",
+
+	"info": {
+		"version": "1.0.0",
+		"title": "numer-project",
+		"description": "numer-project-api",
+		"termOfService": "http://swagger.io/terms/"
+	},
+
+	"securityDefinitions": {
+		"AuthToken": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header",
+			"description": "The token for authentication"
+		}
+	},
+	"security": [
+		{
+			"AuthToken": []
+		}
+	],
+
+	"host": "localhost:5000",
+	"basePath": "/",
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+
+	"paths": {
+		"/api/bisection/get": {
+			"get": {
+				"tags": ["bisection"],
+				"summary": "bisection",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/bisection"
+						}
+					}
+				}
+			}
+		},
+		"/api/falseposition/get": {
+			"get": {
+				"tags": ["falseposition"],
+				"summary": "falseposition",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/falseposition"
+						}
+					}
+				}
+			}
+		},
+		"/api/onepoint/get": {
+			"get": {
+				"tags": ["onepoint"],
+				"summary": "onepoint",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/onepoint"
+						}
+					}
+				}
+			}
+		},
+		"/api/newton/get": {
+			"get": {
+				"tags": ["newton"],
+				"summary": "newton",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/newton"
+						}
+					}
+				}
+			}
+		},
+		"/api/secant/get": {
+			"get": {
+				"tags": ["secant"],
+				"summary": "secant",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/secant"
+						}
+					}
+				}
+			}
+		},
+		"/api/user/login": {
+			"post": {
+				"tags": ["login"],
+				"description": "login",
+				"parameters": [
+					{
+						"name": "user",
+						"in": "body",
+						"description": "User that we want to login",
+						"schema": {
+							"$ref": "#/definitions/login"
+						}
+					}
+				],
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "New user is created",
+						"schema": {
+							"$ref": "#/definitions/login"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"bisection": {
+			"required": ["pb", "xL", "xR"],
+			"properties": {
+				"pb": {
+					"type": "string"
+				},
+				"xL": {
+					"type": "number"
+				},
+				"xR": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"pb": "x^4-13",
+				"xL": "1.5",
+				"xR": "2"
+			}
+		},
+		"falseposition": {
+			"required": ["pb", "xL", "xR"],
+			"properties": {
+				"pb": {
+					"type": "string"
+				},
+				"xL": {
+					"type": "number"
+				},
+				"xR": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"pb": "(x*43)-1",
+				"xL": "0.02",
+				"xR": "0.03"
+			}
+		},
+		"onepoint": {
+			"required": ["pb", "x"],
+			"properties": {
+				"pb": {
+					"type": "string"
+				},
+				"x": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"pb": "(1-0.5*x)/1.5",
+				"x": "0.0"
+			}
+		},
+		"newton": {
+			"required": ["pb", "x"],
+			"properties": {
+				"pb": {
+					"type": "string"
+				},
+				"x": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"pb": "x^2-7",
+				"x": "2"
+			}
+		},
+		"secant": {
+			"required": ["pb", "x0", "x1"],
+			"properties": {
+				"pb": {
+					"type": "string"
+				},
+				"x0": {
+					"type": "number"
+				},
+				"x1": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"pb": "x^2-7",
+				"x0": "2",
+				"x1": "3"
+			}
+		},
+		"login": {
+			"required": ["email", "password"],
+			"properties": {
+				"email": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"example": {
+				"email": "riutyjku@gmail.com",
+				"password": "B1101801127945"
+			}
+		}
+	}
+}
